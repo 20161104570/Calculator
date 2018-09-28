@@ -11,18 +11,23 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var dis: UITextField!
-
     
-    @IBAction func one(_ sender: Any) {
-        dis.text = "1"
+    var userIsInTheMiddleOfTypingANumber: Bool = false
+    
+    @IBAction func app(_ sender: UIButton) {
+        
+        let digit = sender.currentTitle
+        if userIsInTheMiddleOfTypingANumber{
+            dis.text = dis.text! + digit!
+        }
+        else{
+            dis.text = digit
+            userIsInTheMiddleOfTypingANumber = true
+        }
     }
     
-    @IBAction func two(_ sender: Any) {
-        dis.text = "2"
-    }
-    
-    @IBAction func three(_ sender: Any) {
-        dis.text = "3"
+    @IBAction func entrt() {
+        userIsInTheMiddleOfTypingANumber = false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
