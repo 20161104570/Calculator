@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var dis: UITextField!
+    @IBOutlet weak var display: UITextField!
     
     var userIsInTheMiddleOfTypingANumber: Bool = false
     
@@ -18,22 +18,53 @@ class ViewController: UIViewController {
         
         let digit = sender.currentTitle
         if userIsInTheMiddleOfTypingANumber{
-            dis.text = dis.text! + digit!
+            display.text = display.text! + digit!
         }
         else{
-            dis.text = digit
+            display.text = digit
             userIsInTheMiddleOfTypingANumber = true
         }
     }
     
+    @IBAction func operate(_ sender: UIButton) {
+        let operation =  sender.currentTitle
+        if userIsInTheMiddleOfTypingANumber{
+            entrt()
+        }
+        switch operation {
+        //case "+":
+        //case "-":
+        case "*":
+            if operandStack.count >= 2{
+                displayValue = operandStack.removeLast() * operandStack.removeLast()
+                entrt()
+            }
+            
+        // case "/":
+        default: break
+        }
+ 
+    }
+    
+    
+    var operandStack = Array<Double>()
     @IBAction func entrt() {
         userIsInTheMiddleOfTypingANumber = false
+        operandStack.append(displayValue)
+        print("operandStack = \(operandStack)")
+    }
+    var displayValue: Double{
+        get{
+            return NumberFormatter().number(from: display.text!)!.doubleValue
+        }
+        set{
+            display.text = "\(newValue)"
+            userIsInTheMiddleOfTypingANumber = false
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-
 }
 
