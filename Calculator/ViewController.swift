@@ -9,62 +9,72 @@
 import UIKit
 
 class ViewController: UIViewController {
+   
+    @IBOutlet weak var dis: UITextField!
+   
 
-    @IBOutlet weak var display: UITextField!
+
     
+    //var：定义一个变量 变量类型从右边推导而来
     var userIsInTheMiddleOfTypingANumber: Bool = false
     
     @IBAction func app(_ sender: UIButton) {
         
         let digit = sender.currentTitle
+        
         if userIsInTheMiddleOfTypingANumber{
-            display.text = display.text! + digit!
+            dis.text = dis.text! + digit!
         }
         else{
-            display.text = digit
+            dis.text = digit
             userIsInTheMiddleOfTypingANumber = true
         }
     }
     
-    @IBAction func operate(_ sender: UIButton) {
-        let operation =  sender.currentTitle
-        if userIsInTheMiddleOfTypingANumber{
-            entrt()
-        }
-        switch operation {
-        //case "+":
-        //case "-":
-        case "*":
-            if operandStack.count >= 2{
-                displayValue = operandStack.removeLast() * operandStack.removeLast()
-                entrt()
-            }
-            
-        // case "/":
-        default: break
-        }
- 
+    
+    @IBAction func clear(_ sender: UIButton) {
+        //dis.text = "0"
+        
     }
     
+    @IBAction func operate(_ sender: UIButton) {
+        let operation = sender.currentTitle!
+        if userIsInTheMiddleOfTypingANumber{
+            enter()
+        }
+        switch operation{
+          
+        case "×":
+        case "÷":
+        case "+":
+        case "−":
+        //case "√":
+        default: break
+            
+        }
+        
+        
+    }
     
     var operandStack = Array<Double>()
-    @IBAction func entrt() {
+    
+    //若用户点击enter，则将相应数字添加至数组Array中
+    @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         operandStack.append(displayValue)
-        print("operandStack = \(operandStack)")
     }
-    var displayValue: Double{
+    var displayValue: Double {
         get{
-            return NumberFormatter().number(from: display.text!)!.doubleValue
+            return NumberFormatter().number(from: dis.text!)!.doubleValue
         }
         set{
-            display.text = "\(newValue)"
+            dis.text = "\(newValue)"
             userIsInTheMiddleOfTypingANumber = false
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 }
+
+
+
+
 
