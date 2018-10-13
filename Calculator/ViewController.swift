@@ -12,8 +12,6 @@ class ViewController: UIViewController {
    
     @IBOutlet weak var dis: UITextField!
    
-
-
     
     //var：定义一个变量 变量类型从右边推导而来
     var userIsInTheMiddleOfTypingANumber: Bool = false
@@ -31,48 +29,76 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func clear(_ sender: UIButton) {
-        //dis.text = "0"
-        
+        dis.text = ""
     }
     
     @IBAction func operate(_ sender: UIButton) {
+       
         let operation = sender.currentTitle!
-        if userIsInTheMiddleOfTypingANumber{
+        
+        if userIsInTheMiddleOfTypingANumber
+        {
             enter()
         }
-        switch operation{
-          
-        case "×":
-        case "÷":
-        case "+":
-        case "−":
-        //case "√":
+        
+        switch operation {
+        case "×": performOperation { $0 * $1 }
+        case "÷": performOperation { $1 / $0 }
+        case "+": performOperation { $0 + $1 }
+        case "−": performOperation { $1 - $0 }
         default: break
-            
         }
-        
-        
+
+    }
+    // 定义一个方法用来进行加减乘除运算,参数类型是一个方法:(Double, Double)->Double
+    func performOperation(operation:(Double,Double) -> Double) {
+        if operandStack.count >= 2 {  // 栈中必须有两个元素才能进行加减乘除的运算
+            // 把最后的两个元素分别出栈,然后进行运算
+            displayValue = operation(operandStack.removeLast(),operandStack.removeLast())
+            enter()
+        }
     }
     
-    var operandStack = Array<Double>()
+    // 添加private,不让Swift编译器将其暴露给Objective-C运行时
+    private func performOperation(operation:(Double) -> Double)  {
+        // 栈中必须多于一个元素才能进行开平方
+        if operandStack.count >= 1 {
+            displayValue = operation(operandStack.removeLast())
+            enter()
+        }
+    }
     
-    //若用户点击enter，则将相应数字添加至数组Array中
+    var operandStack = [Double]()
+    
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
+        
         operandStack.append(displayValue)
+        
+        print("operandStack = \(operandStack)")
+        
+        
     }
-    var displayValue: Double {
-        get{
+    
+    // 用来进栈的数据
+    var displayValue:Double {
+        get {
+            // 将字符串转换为double
             return NumberFormatter().number(from: dis.text!)!.doubleValue
         }
-        set{
+        set {
+            // 将value转换成字符串
             dis.text = "\(newValue)"
+            // 设置重新开始输入字符串
             userIsInTheMiddleOfTypingANumber = false
         }
     }
+    
 }
+    
+    
+
 
 
 
