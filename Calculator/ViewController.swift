@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     
     //var：定义一个变量 变量类型从右边推导而来
     var userIsInTheMiddleOfTypingANumber: Bool = false
+    var control:Int = 0
+    var control_minus:Int = 0
+    var number_one:String = ""
+    var NumberOfCalculate:Int = 0
     
     @IBAction func app(_ sender: UIButton) {
         
@@ -27,74 +31,84 @@ class ViewController: UIViewController {
             dis.text = digit
             userIsInTheMiddleOfTypingANumber = true
         }
+        if number_one != "" && NumberOfCalculate == 1 && dis.text != "" && dis.text != "" {
+            dis.text = ""
+        }
     }
     
     @IBAction func clear(_ sender: UIButton) {
+        dis.text = "0"
+    }
+    
+    @IBAction func point(_ sender: Any) {
+        dis.text = dis.text! + "."
+    }
+    
+    @IBAction func minus(_ sender: Any) {
+        if control_minus == 0 {
+            dis.text = "-" + dis.text!
+            control_minus = 1
+        }
+        else {
+            dis.text?.removeFirst()
+            control_minus = 0
+        }
+    }
+    
+    @IBAction func addition(_ sender: Any) {
+        control = 1
+        number_one = dis.text!
         dis.text = ""
+        NumberOfCalculate = 0
     }
     
-    @IBAction func operate(_ sender: UIButton) {
-       
-        let operation = sender.currentTitle!
-        
-        if userIsInTheMiddleOfTypingANumber
-        {
-            enter()
+    @IBAction func subtraction(_ sender: Any) {
+        control = 2
+        number_one = dis.text!
+        dis.text = ""
+        NumberOfCalculate = 0
+    }
+    
+    @IBAction func multiplication(_ sender: Any) {
+        control = 3
+        number_one = dis.text!
+        dis.text = ""
+        NumberOfCalculate = 0
+    }
+    
+    @IBAction func division(_ sender: Any) {
+        control = 4
+        number_one = dis.text!
+        dis.text = ""
+        NumberOfCalculate = 0
+    }
+    @IBAction func ca(_ sender: UIButton) {
+        var strtemp:String = ""
+        switch control {
+        case 1 :
+            strtemp = "\(Double(number_one)! + Double(dis.text!)!)"
+        case 2 :
+            strtemp = "\(Double(number_one)! - Double(dis.text!)!)"
+        case 3 :
+            strtemp = "\(Double(number_one)! * Double(dis.text!)!)"
+        case 4 :
+            strtemp = "\(Double(number_one)! / Double(dis.text!)!)"
+        default:
+            strtemp = "0"
         }
         
-        switch operation {
-        case "×": performOperation { $0 * $1 }
-        case "÷": performOperation { $1 / $0 }
-        case "+": performOperation { $0 + $1 }
-        case "−": performOperation { $1 - $0 }
-        default: break
+        while (strtemp.last == "0"){
+            strtemp.removeLast()
         }
+        if (strtemp.last == "."){
+            strtemp.removeLast()
+        }
+        dis.text = strtemp
+        control = 0
+        number_one = dis.text!
+        NumberOfCalculate = NumberOfCalculate + 1
+    }
 
-    }
-    // 定义一个方法用来进行加减乘除运算,参数类型是一个方法:(Double, Double)->Double
-    func performOperation(operation:(Double,Double) -> Double) {
-        if operandStack.count >= 2 {  // 栈中必须有两个元素才能进行加减乘除的运算
-            // 把最后的两个元素分别出栈,然后进行运算
-            displayValue = operation(operandStack.removeLast(),operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    // 添加private,不让Swift编译器将其暴露给Objective-C运行时
-    private func performOperation(operation:(Double) -> Double)  {
-        // 栈中必须多于一个元素才能进行开平方
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    var operandStack = [Double]()
-    
-    @IBAction func enter() {
-        userIsInTheMiddleOfTypingANumber = false
-        
-        operandStack.append(displayValue)
-        
-        print("operandStack = \(operandStack)")
-        
-        
-    }
-    
-    // 用来进栈的数据
-    var displayValue:Double {
-        get {
-            // 将字符串转换为double
-            return NumberFormatter().number(from: dis.text!)!.doubleValue
-        }
-        set {
-            // 将value转换成字符串
-            dis.text = "\(newValue)"
-            // 设置重新开始输入字符串
-            userIsInTheMiddleOfTypingANumber = false
-        }
-    }
-    
 }
     
     
