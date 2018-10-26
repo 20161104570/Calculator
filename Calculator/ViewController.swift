@@ -17,15 +17,19 @@ class ViewController: UIViewController {
     
     var number_one:String = ""
 
+    var a = ""
+    
     @IBAction func app(_ sender: UIButton) {
         
         let digit = sender.currentTitle
         
         if userIsInTheMiddleOfTypingANumber{
             dis.text = dis.text! + digit!
+            a = dis.text!
         }
         else{
             dis.text = digit
+            a = dis.text!
             userIsInTheMiddleOfTypingANumber = true
         }
        
@@ -59,8 +63,8 @@ class ViewController: UIViewController {
     @IBAction func addition(_ sender: Any) {
         control = 1
         number_one = dis.text!
-        dis.text = ""
-        
+        dis.text = number_one + "+"
+        a = ""
     }
     
     @IBAction func subtraction(_ sender: Any) {
@@ -85,9 +89,12 @@ class ViewController: UIViewController {
     }
     @IBAction func ca(_ sender: UIButton) {
         var result:String = ""
+        //var two:String = ""
+        //tow = dis.text!
+        
         switch control {
         case 1 :
-            result = "\(Double(number_one)! + Double(dis.text!)!)"
+            result = "\(Double(number_one)! + Double(a)!)"
         case 2 :
             result = "\(Double(number_one)! - Double(dis.text!)!)"
         case 3 :
