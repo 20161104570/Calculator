@@ -52,19 +52,6 @@
                                     <action selector="app:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1rS-Ir-B81"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej2-nw-nXp">
-                                <rect key="frame" x="187" y="476" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <state key="normal" title=".">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="point:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ps5-35-Pt2"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vye-Go-xt5">
                                 <rect key="frame" x="267" y="236" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -282,6 +269,20 @@
                                 </state>
                                 <connections>
                                     <action selector="remove:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gf0-Wu-eaq"/>
+                                </connections>
+                            </button>
+                            <button autoresizesSubviews="NO" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T35-IL-4Zg">
+                                <rect key="frame" x="187" y="476" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.75" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <state key="normal" title=".">
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="point:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PT8-fD-4fe"/>
                                 </connections>
                             </button>
                         </subviews>
