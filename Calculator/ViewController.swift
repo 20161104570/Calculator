@@ -45,9 +45,7 @@ class ViewController: UIViewController {
         if(symbol != ""){
             dis.text = number_one + symbol + number
         }
-        if (symbol == "/" && number == "0"){
-            dis.text = "错误，除数不为0"
-        }
+        
         
     }
     
@@ -85,21 +83,38 @@ class ViewController: UIViewController {
     }
     //remove
     @IBAction func remove(_ sender: Any) {
-        result.removeLast()
+        dis.text?.removeLast()
+        if(symbol == ""){
+            number = dis.text!
+        }
     }
     
     @IBAction func addition(_ sender: Any) {
+        var c = 0
+        if(c == 0){
+            
         control = 1
-        number_one = dis.text!
+        number_one = number
         symbol = "+"
         dis.text = number_one + symbol
         number = ""
         decimal = 0
+        
+            c = 1
+        
+        }
+        else{
+            
+                result = "\(Double(number_one)! + Double(number)!)"
+                dis.text = result
+                number_one = dis.text!
+            
+        }
     }
     
     @IBAction func subtraction(_ sender: Any) {
         control = 2
-        number_one = dis.text!
+        number_one = number
         symbol = "-"
         dis.text = number_one + symbol
         number = ""
@@ -109,7 +124,7 @@ class ViewController: UIViewController {
     
     @IBAction func multiplication(_ sender: Any) {
         control = 3
-        number_one = dis.text!
+        number_one = number
         symbol = "*"
         dis.text = number_one + symbol
         number = ""
@@ -118,7 +133,7 @@ class ViewController: UIViewController {
     
     @IBAction func division(_ sender: Any) {
         control = 4
-        number_one = dis.text!
+        number_one = number
         symbol = "/"
         dis.text = number_one + symbol
         number = ""
@@ -138,18 +153,25 @@ class ViewController: UIViewController {
         case 3 :
             result = "\(Double(number_one)! * Double(number)!)"
         case 4 :
-            result = "\(Double(number_one)! / Double(number)!)"
+            if (number == "0"){
+                result = "错误,除数不为0"
+            }
+            else{
+                result = "\(Double(number_one)! / Double(number)!)"
+            }
         default:
             result = "0"
         }
         
-        result = String(format: "%0.8f", Double(result)!)
-        
-        while (result.last == "0"){
-            result.removeLast() // 数组尾端移除变量值
-        }
-        if (result.last == "."){
-            result.removeLast()
+        if (result != "错误,除数不为0"){
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
         }
         
         dis.text = result
