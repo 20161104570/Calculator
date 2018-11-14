@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         result = ""
         number = ""
         decimal = 0
+        control = 0
     }
     
     @IBAction func point(_ sender: Any) {
@@ -98,9 +99,17 @@ class ViewController: UIViewController {
             dis.text = ""
         }
         else{
+            
             dis.text?.removeLast()
             if(symbol == ""){
                 number = dis.text!
+                
+            }
+            else if(symbol != "" && number == ""){
+                dis.text?.removeLast()
+                number_one = dis.text!
+                symbol = ""
+                
             }
             else{
                 number.removeLast()
@@ -123,7 +132,27 @@ class ViewController: UIViewController {
                 decimal = 0
                 dis.text = number_one + symbol
         }
-        
+        else if(control == 1 && number == ""){
+            result = "\(Double(number_one)! + Double(number_one)!)"
+            dis.text = result
+            number_one = dis.text!
+        }
+        else if(control == 1 && number != ""){
+            result = "\(Double(number_one)! + Double(number)!)"
+            dis.text = result
+            number = dis.text!
+            dis.text = number
+            control = 0
+            decimal = 0
+        }
+        else if(control == 2 && number != ""){
+            result = "\(Double(number_one)! + Double(number)!)"
+            dis.text = result
+            number = dis.text!
+            dis.text = number
+            decimal = 0
+            control = 0
+        }
     }
     
     @IBAction func subtraction(_ sender: Any) {
@@ -139,7 +168,21 @@ class ViewController: UIViewController {
                 decimal = 0
                 dis.text = number_one + symbol
             }
-       
+        else if(control == 2 && number == ""){
+            result = "\(Double(number_one)! + Double(number_one)!)"
+            dis.text = result
+            number_one = dis.text!
+        }
+        else if(control == 2 && number != ""){
+            result = "\(Double(number_one)! + Double(number)!)"
+            dis.text = result
+            number_one = dis.text!
+            number = ""
+            decimal = 0
+            control = 0
+            dis.text = number_one
+        }
+        
     }
     
     @IBAction func multiplication(_ sender: Any) {
