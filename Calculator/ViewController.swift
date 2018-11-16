@@ -98,23 +98,36 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
-        else{
+
+        else if(control == 0){
             
-            dis.text?.removeLast()
-            if(symbol == ""){
+            if(dis.text?.last == "."){
+                dis.text?.removeLast()
                 number = dis.text!
-                
+                decimal = 0
             }
-            else if(symbol != "" && number == ""){
+            else{
+                dis.text?.removeLast()
+                number = dis.text!
+            }
+        }
+        else if(control != 0  && number == ""){
+            
+            if(dis.text?.last == "."){
+                dis.text?.removeLast()
+                number = dis.text!
+                decimal = 0
+            }
+            else{
                 dis.text?.removeLast()
                 number_one = dis.text!
                 symbol = ""
-                
+                control = 0
             }
-            else{
-                number.removeLast()
-                dis.text = number_one + symbol + number
-            }
+        }
+        else{
+            number.removeLast()
+            dis.text = number_one + symbol + number
         }
         
     }
@@ -134,25 +147,19 @@ class ViewController: UIViewController {
         }
         else if(control == 1 && number == ""){
             result = "\(Double(number_one)! + Double(number_one)!)"
-            dis.text = result
-            number_one = dis.text!
+            number = result
+            number_one = result
+            dis.text = result + symbol
+            
         }
         else if(control == 1 && number != ""){
             result = "\(Double(number_one)! + Double(number)!)"
-            dis.text = result
-            number = dis.text!
-            dis.text = number
-            control = 0
+            number_one = result
+            dis.text = number_one + symbol
             decimal = 0
+            number = ""
         }
-        else if(control == 2 && number != ""){
-            result = "\(Double(number_one)! + Double(number)!)"
-            dis.text = result
-            number = dis.text!
-            dis.text = number
-            decimal = 0
-            control = 0
-        }
+   
     }
     
     @IBAction func subtraction(_ sender: Any) {
@@ -168,21 +175,7 @@ class ViewController: UIViewController {
                 decimal = 0
                 dis.text = number_one + symbol
             }
-        else if(control == 2 && number == ""){
-            result = "\(Double(number_one)! + Double(number_one)!)"
-            dis.text = result
-            number_one = dis.text!
-        }
-        else if(control == 2 && number != ""){
-            result = "\(Double(number_one)! + Double(number)!)"
-            dis.text = result
-            number_one = dis.text!
-            number = ""
-            decimal = 0
-            control = 0
-            dis.text = number_one
-        }
-        
+
     }
     
     @IBAction func multiplication(_ sender: Any) {
@@ -253,10 +246,11 @@ class ViewController: UIViewController {
                     result.removeLast()
                 }
             }
-        
+            
+            //number_one = ""
             dis.text = result
-            control = 0
-            number_one = dis.text!
+            number = result
+            decimal = 0
             control = 0
             symbol = ""
         }
