@@ -456,6 +456,10 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
+        else if(control == 0)
+        {
+            dis.text = dis.text
+        }
         else if(number == ""){
             dis.text = number_one + symbol
         }
@@ -492,7 +496,7 @@ class ViewController: UIViewController {
             //number_one = ""
             dis.text = result
             number = result
-            decimal = 0
+            //decimal = 0
             control = 0
             symbol = ""
         }
