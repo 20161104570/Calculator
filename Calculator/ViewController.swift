@@ -61,6 +61,9 @@ class ViewController: UIViewController {
         decimal = 0
         control = 0
         control_minus = 0
+        a = ""
+        b = 0
+        c = ""
     }
     
     @IBAction func point(_ sender: Any) {
@@ -167,6 +170,27 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = number_one + symbol
         }
+        else if(b != 0){
+            if(b == 1){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! + Double(c)!)"
+                
+            }
+            else if(b == 2){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! - Double(c)!)"
+            }
+            //number = result
+            number_one = result
+            number = ""
+            symbol = "+"
+            control = 1
+            decimal = 0
+            control_minus = 0
+            dis.text = result + symbol
+            b = 0
+            
+        }
         else if(control == 1 && number == ""){
             result = "\(Double(number_one)! + Double(number_one)!)"
             number = result
@@ -235,6 +259,27 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = number_one + symbol
             }
+        else if(b != 0){
+            if(b == 1){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! + Double(c)!)"
+                
+            }
+            else if(b == 2){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! - Double(c)!)"
+            }
+            //number = result
+            number_one = result
+            number = ""
+            symbol = "-"
+            control = 2
+            decimal = 0
+            control_minus = 0
+            dis.text = result + symbol
+            b = 0
+        
+        }
         else if(control == 2 && number == ""){
             result = "\(Double(number_one)! - Double(number_one)!)"
             number = result
@@ -290,6 +335,9 @@ class ViewController: UIViewController {
 
     }
     
+    var a = ""
+    var b = 0
+    var c = ""
     @IBAction func multiplication(_ sender: Any) {
         
         if(dis.text == ""){
@@ -304,6 +352,25 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = number_one + symbol
         }
+        else if(b != 0){
+            if(b == 1){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! + Double(c)!)"
+                
+            }
+            else if(b == 2){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! - Double(c)!)"
+            }
+            number = result
+            number_one = result
+            symbol = "*"
+            control = 3
+            decimal = 0
+            control_minus = 0
+            dis.text = result + symbol
+            b = 0
+        }
         else if(control == 3 && number == ""){
             result = "\(Double(number_one)! * Double(number_one)!)"
             number = result
@@ -315,25 +382,49 @@ class ViewController: UIViewController {
             dis.text = result + symbol
             
         }
-        else if(control == 1 && number != ""){
-            result = "\(Double(number_one)! + Double(number)!)"
-            number_one = result
-            symbol = "*"
-            control = 3
-            decimal = 0
-            control_minus = 0
-            number = ""
-            dis.text = number_one + symbol
-        }
-        else if(control == 2 && number != ""){
-            result = "\(Double(number_one)! - Double(number)!)"
-            number_one = result
-            symbol = "*"
-            control = 3
-            decimal = 0
-            control_minus = 0
-            number = ""
-            dis.text = number_one + symbol
+        else if(control == 1 || control == 2){
+            if(control == 1){
+                a = number_one
+                b = control
+                control = 3
+                number_one = number
+                number = ""
+                symbol = "*"
+                dis.text = a + "+" + number_one + symbol
+            }
+            else {
+                a = number_one
+                b = control
+                control = 3
+                number_one = number
+                number = ""
+                symbol = "*"
+                dis.text = a + "-" + number_one + symbol
+            }
+            
+/*
+            if(control == 1 && number != ""){
+                result = "\(Double(number_one)! + Double(number)!)"
+                number_one = result
+                symbol = "*"
+                control = 3
+                decimal = 0
+                control_minus = 0
+                number = ""
+                dis.text = number_one + symbol
+            }
+            else if(control == 2 && number != ""){
+                result = "\(Double(number_one)! - Double(number)!)"
+                number_one = result
+                symbol = "*"
+                control = 3
+                decimal = 0
+                control_minus = 0
+                number = ""
+                dis.text = number_one + symbol
+ 
+            }
+*/
         }
         else if(control == 3 && number != ""){
             result = "\(Double(number_one)! * Double(number)!)"
@@ -372,6 +463,47 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = number_one + symbol
             }
+        else if(control == 1 || control == 2){
+            
+            if(control == 1){
+                a = number_one
+                b = control
+                control = 4
+                number_one = number
+                number = ""
+                symbol = "/"
+                dis.text = a + "+" + number_one + symbol
+            }
+            else {
+                a = number_one
+                b = control
+                control = 4
+                number_one = number
+                number = ""
+                symbol = "/"
+                dis.text = a + "-" + number_one + symbol
+            }
+        }
+        else if(b != 0){
+            if(b == 1){
+                c = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(a)! + Double(c)!)"
+                
+            }
+            else if(b == 2){
+                c = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(a)! - Double(c)!)"
+            }
+            number = result
+            number_one = result
+            symbol = "/"
+            control = 4
+            decimal = 0
+            control_minus = 0
+            dis.text = result + symbol
+            b = 0
+        }
+        
         else if(control == 4 && number == ""){
             result = "\(Double(number_one)! / Double(number_one)!)"
             number = result
@@ -383,39 +515,40 @@ class ViewController: UIViewController {
             dis.text = result + symbol
             
         }
-        else if(control == 1 && number != ""){
-            if (number == "0"){
-                result = "错误,除数不为0"
-                dis.text = result
-            }
-            else {
-                result = "\(Double(number_one)! + Double(number)!)"
-                number_one = result
-                symbol = "/"
-                control = 4
-                decimal = 0
-                control_minus = 0
-                number = ""
-                dis.text = number_one + symbol
-            }
-        }
-        else if(control == 2 && number != ""){
-            
-            if (number == "0"){
-                result = "错误,除数不为0"
-                dis.text = result
-            }
-            else {
-                result = "\(Double(number_one)! - Double(number)!)"
-                number_one = result
-                symbol = "/"
-                control = 4
-                decimal = 0
-                control_minus = 0
-                number = ""
-                dis.text = number_one + symbol
-            }
-        }
+        
+//        else if(control == 1 && number != ""){
+//            if (number == "0"){
+//                result = "错误,除数不为0"
+//                dis.text = result
+//            }
+//            else {
+//                result = "\(Double(number_one)! + Double(number)!)"
+//                number_one = result
+//                symbol = "/"
+//                control = 4
+//                decimal = 0
+//                control_minus = 0
+//                number = ""
+//                dis.text = number_one + symbol
+//            }
+//        }
+//        else if(control == 2 && number != ""){
+//
+//            if (number == "0"){
+//                result = "错误,除数不为0"
+//                dis.text = result
+//            }
+//            else {
+//                result = "\(Double(number_one)! - Double(number)!)"
+//                number_one = result
+//                symbol = "/"
+//                control = 4
+//                decimal = 0
+//                control_minus = 0
+//                number = ""
+//                dis.text = number_one + symbol
+//            }
+//        }
         else if(control == 3 && number != ""){
             if (number == "0"){
                 result = "错误,除数不为0"
@@ -462,6 +595,47 @@ class ViewController: UIViewController {
         }
         else if(number == ""){
             dis.text = number_one + symbol
+        }
+        else if(b != 0)
+        {
+            if(control == 3)
+            {
+                if(b == 1){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! + Double(c)!)"
+                
+                }
+                if(b == 2){
+                c = "\(Double(number_one)! * Double(number)!)"
+                result = "\(Double(a)! - Double(c)!)"
+                }
+                //number_one = ""
+                dis.text = result
+                number = result
+                //decimal = 0
+                control = 0
+                symbol = ""
+                b = 0
+            }
+            else if(control == 4)
+            {
+                if(b == 1){
+                    c = "\(Double(number_one)! / Double(number)!)"
+                    result = "\(Double(a)! + Double(c)!)"
+                    
+                }
+                if(b == 2){
+                    c = "\(Double(number_one)! / Double(number)!)"
+                    result = "\(Double(a)! - Double(c)!)"
+                }
+                //number_one = ""
+                dis.text = result
+                number = result
+                //decimal = 0
+                control = 0
+                symbol = ""
+                b = 0
+            }
         }
         else{
             switch control {
