@@ -36,19 +36,19 @@ class ViewController: UIViewController {
         if userIsInTheMiddleOfTypingANumber{
            
             number = number + digit!
-            dis.text! = number
+            dis.text! = dis.text! + number
             
         }
         else{
             
             number = digit!
-             dis.text = number
+             dis.text = dis.text! + number
             userIsInTheMiddleOfTypingANumber = true
         }
         
-        if(symbol != ""){
-            dis.text = number_one + symbol + number
-        }
+//        if(symbol != ""){
+//            dis.text = dis.text! + number
+//        }
         
         
     }
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
             decimal = 1
         }
         if(symbol != ""){
-            dis.text = number_one + symbol + number
+            dis.text = dis.text! + number
         }
         
     }
@@ -183,7 +183,7 @@ class ViewController: UIViewController {
                 control = 1
                 decimal = 0
                 control_minus = 0
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
         }
         else if(control_storage != 0 && number != ""){
             if(control_storage == 1){
@@ -225,7 +225,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 2 && number != ""){
             result = "\(Double(number_one)! - Double(number)!)"
@@ -235,7 +235,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 3 && number != ""){
             result = "\(Double(number_one)! * Double(number)!)"
@@ -245,7 +245,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 4 && number != ""){
             result = "\(Double(number_one)! / Double(number)!)"
@@ -255,7 +255,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
    
     }
@@ -272,7 +272,7 @@ class ViewController: UIViewController {
                 control = 2
                 decimal = 0
                 control_minus = 0
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
             }
         else if(control_storage != 0 && number != ""){
             if(control_storage == 1 ){
@@ -314,7 +314,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 2 && number != ""){
             result = "\(Double(number_one)! - Double(number)!)"
@@ -324,7 +324,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 3 && number != ""){
             result = "\(Double(number_one)! * Double(number)!)"
@@ -334,7 +334,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 4 && number != ""){
             result = "\(Double(number_one)! / Double(number)!)"
@@ -344,7 +344,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         
 
@@ -365,7 +365,7 @@ class ViewController: UIViewController {
                 control = 3
                 decimal = 0
                 control_minus = 0
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
         }
         else if(control_storage != 0 && number != ""){
             if(control_storage == 1){
@@ -406,7 +406,7 @@ class ViewController: UIViewController {
                 number = ""
                 symbol = "*"
                 decimal = 0
-                dis.text = number_storage + "+" + number_one + symbol
+                dis.text = dis.text! + symbol
             }
             else if(control == 2 && number != ""){
                 number_storage = number_one
@@ -415,7 +415,7 @@ class ViewController: UIViewController {
                 number_one = number
                 number = ""
                 symbol = "*"
-                dis.text = number_storage + "-" + number_one + symbol
+                dis.text = dis.text! + symbol
             }
             
         else if(control == 3 && number != ""){
@@ -426,7 +426,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control == 4 && number != ""){
             result = "\(Double(number_one)! / Double(number)!)"
@@ -436,7 +436,7 @@ class ViewController: UIViewController {
             decimal = 0
             control_minus = 0
             number = ""
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         
     }
@@ -453,7 +453,7 @@ class ViewController: UIViewController {
                 control = 4
                 decimal = 0
                 control_minus = 0
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
             }
         
             
@@ -465,7 +465,7 @@ class ViewController: UIViewController {
                 number = ""
                 symbol = "/"
                 decimal = 0
-                dis.text = number_storage + "+" + number_one + symbol
+                dis.text = dis.text! + symbol
             }
             else if(control == 2 && number != ""){
                 number_storage = number_one
@@ -474,7 +474,7 @@ class ViewController: UIViewController {
                 number_one = number
                 number = ""
                 symbol = "/"
-                dis.text = number_storage + "-" + number_one + symbol
+                dis.text = dis.text! + symbol
             }
         
         else if(control_storage != 0 && number != ""){
@@ -528,7 +528,7 @@ class ViewController: UIViewController {
                 decimal = 0
                 control_minus = 0
                 number = ""
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
             }
         }
         else if(control == 4 && number != ""){
@@ -544,7 +544,7 @@ class ViewController: UIViewController {
                 decimal = 0
                 control_minus = 0
                 number = ""
-                dis.text = number_one + symbol
+                dis.text = dis.text! + symbol
             }
         }
         
@@ -560,7 +560,7 @@ class ViewController: UIViewController {
             dis.text = dis.text
         }
         else if(number == ""){
-            dis.text = number_one + symbol
+            dis.text = dis.text! + symbol
         }
         else if(control_storage != 0 && number != "")
         {
