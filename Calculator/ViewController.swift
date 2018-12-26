@@ -73,12 +73,12 @@ class ViewController: UIViewController {
         if (decimal == 0)
         {
             number = number + "."
-            dis.text = number
+            dis.text = dis.text! + "."
             decimal = 1
         }
-        if(symbol != ""){
-            dis.text = dis.text! + number
-        }
+//        if(symbol != ""){
+//            dis.text = dis.text! + number
+//        }
         
     }
 
@@ -99,6 +99,7 @@ class ViewController: UIViewController {
             }
         }
         else{
+            
             if(control_minus == 0) {
                 dis.text = "-" + dis.text!
                 control_minus = 1
@@ -185,7 +186,8 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = dis.text! + symbol
         }
-        else if(control_storage != 0 && number != ""){
+        else if(control_storage != 0 && number != "" && control == 3){
+            
             if(control_storage == 1){
                 result = "\(Double(number_one)! * Double(number)!)"
                 result = "\(Double(number_storage)! + Double(result)!)"
@@ -195,14 +197,43 @@ class ViewController: UIViewController {
                 result = "\(Double(number_one)! * Double(number)!)"
                 result = "\(Double(number_storage)! - Double(result)!)"
             }
-            //number = result
+            
             number_one = result
             number = ""
             symbol = "+"
             control = 1
             decimal = 0
             control_minus = 0
-            dis.text = result + symbol
+            dis.text = dis.text! + symbol
+            control_storage = 0
+            
+        }
+        else if(control_storage != 0 && number != "" && control == 4){
+            
+            if(control_storage == 1){
+                result = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(number_storage)! + Double(result)!)"
+                
+            }
+            else if(control_storage == 2){
+                result = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(number_storage)! - Double(result)!)"
+            }
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
+            number_one = result
+            number = ""
+            symbol = "+"
+            control = 1
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
             control_storage = 0
             
         }
@@ -249,6 +280,14 @@ class ViewController: UIViewController {
         }
         else if(control == 4 && number != ""){
             result = "\(Double(number_one)! / Double(number)!)"
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
             number_one = result
             symbol = "+"
             control = 1
@@ -274,8 +313,9 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = dis.text! + symbol
             }
-        else if(control_storage != 0 && number != ""){
-            if(control_storage == 1 ){
+        else if(control_storage != 0 && number != "" && control == 3){
+            
+            if(control_storage == 1){
                 result = "\(Double(number_one)! * Double(number)!)"
                 result = "\(Double(number_storage)! + Double(result)!)"
                 
@@ -284,16 +324,45 @@ class ViewController: UIViewController {
                 result = "\(Double(number_one)! * Double(number)!)"
                 result = "\(Double(number_storage)! - Double(result)!)"
             }
-            //number = result
+            
             number_one = result
             number = ""
             symbol = "-"
             control = 2
             decimal = 0
             control_minus = 0
-            dis.text = result + symbol
+            dis.text = dis.text! + symbol
             control_storage = 0
-        
+            
+        }
+        else if(control_storage != 0 && number != "" && control == 4){
+            
+            if(control_storage == 1){
+                result = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(number_storage)! + Double(result)!)"
+                
+            }
+            else if(control_storage == 2){
+                result = "\(Double(number_one)! / Double(number)!)"
+                result = "\(Double(number_storage)! - Double(result)!)"
+            }
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
+            number_one = result
+            number = ""
+            symbol = "-"
+            control = 2
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+            control_storage = 0
+            
         }
         else if(control == 2 && number == ""){
             result = "\(Double(number_one)! - Double(number_one)!)"
@@ -367,37 +436,40 @@ class ViewController: UIViewController {
                 control_minus = 0
                 dis.text = dis.text! + symbol
         }
-        else if(control_storage != 0 && number != ""){
-            if(control_storage == 1){
-                result = "\(Double(number_one)! * Double(number)!)"
-                result = "\(Double(number_storage)! + Double(result)!)"
-                
-            }
-            else if(control_storage == 2){
-                result = "\(Double(number_one)! * Double(number)!)"
-                result = "\(Double(number_storage)! - Double(result)!)"
-            }
-            number = result
+        else if(control_storage != 0 && number != "" && control == 3){
+            
+            result = "\(Double(number_one)! * Double(number)!)"
+            
             number_one = result
+            number = ""
             symbol = "*"
             control = 3
             decimal = 0
             control_minus = 0
-            dis.text = result + symbol
-            control_storage = 0
-        }
-        else if(control == 3 && number == ""){
-            result = "\(Double(number_one)! * Double(number_one)!)"
-            number = result
-            number_one = result
-            symbol = "*"
-            control = 3
-            decimal = 0
-            control_minus = 0
-            dis.text = result + symbol
+            dis.text = dis.text! + symbol
             
         }
        
+        else if(control_storage != 0 && number != "" && control == 4){
+            
+            result = "\(Double(number_one)! / Double(number)!)"
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
+            number_one = result
+            number = ""
+            symbol = "*"
+            control = 3
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+            
+        }
            else if(control == 1 && number != ""){
                 number_storage = number_one
                 control_storage = control
@@ -456,55 +528,52 @@ class ViewController: UIViewController {
                 dis.text = dis.text! + symbol
             }
         
+        else if(control_storage != 0 && number != "" && control == 3){
             
-            else if(control == 1 && number != ""){
-                number_storage = number_one
-                control_storage = control
-                control = 4
-                number_one = number
-                number = ""
-                symbol = "/"
-                decimal = 0
-                dis.text = dis.text! + symbol
-            }
-            else if(control == 2 && number != ""){
-                number_storage = number_one
-                control_storage = control
-                control = 4
-                number_one = number
-                number = ""
-                symbol = "/"
-                dis.text = dis.text! + symbol
-            }
-        
-        else if(control_storage != 0 && number != ""){
+            result = "\(Double(number_one)! * Double(number)!)"
             
-            if (number == "0"){
-                result = "错误,除数不为0"
-            }
-            else{
-                if(control_storage == 1){
-                    result = "\(Double(number_one)! / Double(number)!)"
-                    result = "\(Double(number_storage)! + Double(result)!)"
-                
-                }
-                else if(control_storage == 2){
-                    result = "\(Double(number_one)! / Double(number)!)"
-                    result = "\(Double(number_storage)! - Double(result)!)"
-                }
-                number = result
-                number_one = result
-                symbol = "/"
-                control = 4
-                decimal = 0
-                control_minus = 0
-                dis.text = result + symbol
-                control_storage = 0
-            }
+            number_one = result
+            number = ""
+            symbol = "/"
+            control = 4
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+            
         }
-        
+            
+        else if(control_storage != 0 && number != "" && control == 4){
+            
+            result = "\(Double(number_one)! / Double(number)!)"
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
+            number_one = result
+            number = ""
+            symbol = "/"
+            control = 4
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+            
+        }
+            
         else if(control == 4 && number == ""){
+            
             result = "\(Double(number_one)! / Double(number_one)!)"
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
             number = result
             number_one = result
             symbol = "/"
@@ -514,6 +583,41 @@ class ViewController: UIViewController {
             dis.text = result + symbol
             
         }
+            
+            else if(control == 1 && number != ""){
+            
+                if (number == "0"){
+                    result = "错误,除数不为0"
+                    dis.text = result
+                }
+                else {
+                    number_storage = number_one
+                    control_storage = control
+                    control = 4
+                    number_one = number
+                    number = ""
+                    symbol = "/"
+                    decimal = 0
+                    dis.text = dis.text! + symbol
+                }
+            }
+            
+            else if(control == 2 && number != ""){
+            
+                if (number == "0"){
+                    result = "错误,除数不为0"
+                    dis.text = result
+                }
+                else {
+                    number_storage = number_one
+                    control_storage = control
+                    control = 4
+                    number_one = number
+                    number = ""
+                    symbol = "/"
+                    dis.text = dis.text! + symbol
+                }
+            }
 
         else if(control == 3 && number != ""){
             if (number == "0"){
@@ -546,22 +650,25 @@ class ViewController: UIViewController {
                 number = ""
                 dis.text = dis.text! + symbol
             }
+            result = String(format: "%0.8f", Double(result)!)
+            
+            while (result.last == "0"){
+                result.removeLast() // 数组尾端移除变量值
+            }
+            if (result.last == "."){
+                result.removeLast()
+            }
         }
         
        
     }
     @IBAction func ca(_ sender: UIButton) {
         
-        if(dis.text == ""){
-            dis.text = ""
-        }
-        else if(control == 0)
+         if(control == 0 || number == "")
         {
             dis.text = dis.text
         }
-        else if(number == ""){
-            dis.text = dis.text! + symbol
-        }
+            
         else if(control_storage != 0 && number != "")
         {
             if(control == 3)
@@ -575,35 +682,63 @@ class ViewController: UIViewController {
                 result = "\(Double(number_one)! * Double(number)!)"
                 result = "\(Double(number_storage)! - Double(result)!)"
                 }
-                //number_one = ""
+                
+                    result = String(format: "%0.8f", Double(result)!)
+                    
+                    while (result.last == "0"){
+                        result.removeLast() // 数组尾端移除变量值
+                    }
+                    if (result.last == "."){
+                        result.removeLast()
+                    }
+                
+                number_one = ""
                 dis.text = result
                 number = result
-                //decimal = 0
+                decimal = 0
                 control = 0
                 symbol = ""
                 control_storage = 0
             }
+                
             else if(control == 4)
             {
-                if(control_storage == 1){
-                    result = "\(Double(number_one)! / Double(number)!)"
-                    result = "\(Double(number_storage)! + Double(result)!)"
+                if (number == "0"){
+                    result = "错误,除数不为0"
+                }
+                else{
+                    if(control_storage == 1){
+                        result = "\(Double(number_one)! / Double(number)!)"
+                        result = "\(Double(number_storage)! + Double(result)!)"
                     
+                    }
+                    if(control_storage == 2){
+                        result = "\(Double(number_one)! / Double(number)!)"
+                        result = "\(Double(number_storage)! - Double(result)!)"
+                    }
+                    if (result != "错误,除数不为0"){
+                        result = String(format: "%0.8f", Double(result)!)
+                        
+                        while (result.last == "0"){
+                            result.removeLast() // 数组尾端移除变量值
+                        }
+                        if (result.last == "."){
+                            result.removeLast()
+                        }
+                    }
+                    number_one = ""
+                    dis.text = result
+                    number = result
+                    decimal = 0
+                    control = 0
+                    symbol = ""
+                    control_storage = 0
                 }
-                if(control_storage == 2){
-                    result = "\(Double(number_one)! / Double(number)!)"
-                    result = "\(Double(number_storage)! - Double(result)!)"
-                }
-                //number_one = ""
-                dis.text = result
-                number = result
-                //decimal = 0
-                control = 0
-                symbol = ""
-                control_storage = 0
             }
         }
+            
         else{
+            
             switch control {
             case 1 :
                 result = "\(Double(number_one)! + Double(number)!)"
@@ -633,14 +768,15 @@ class ViewController: UIViewController {
                 }
             }
             
-            //number_one = ""
+            number_one = ""
             dis.text = result
             number = result
-            //decimal = 0
+            decimal = 0
             control = 0
+            number_storage = ""
+            control_storage = 0
             symbol = ""
+            
         }
-        
     }
-    
 }
