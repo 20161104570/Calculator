@@ -29,9 +29,40 @@ class ViewController: UIViewController {
     
     var control_minus:Int = 0 //正负号
     
+    //数字键
     @IBAction func app(_ sender: UIButton) {
         
         let digit = sender.currentTitle
+        //做小数点时在显示（dis.text）和数字记录（numbe）时都有记录
+        //运算没有问题，但显示时会重复
+        //代码 39 -- 65
+        if(control == 0){
+            dis.text = ""
+        }
+        
+        if(control == 1){
+            while(dis.text?.last != "+" && control != 0){
+                dis.text?.removeLast()
+            }
+        }
+        
+        else if(control == 2){
+            while(dis.text?.last != "-" && control != 0){
+                dis.text?.removeLast()
+            }
+        }
+        
+        else if(control == 3){
+            while(dis.text?.last != "*" && control != 0){
+                dis.text?.removeLast()
+            }
+        }
+        
+        else if(control == 4){
+            while(dis.text?.last != "/" && control != 0){
+                dis.text?.removeLast()
+            }
+        }
         
         if userIsInTheMiddleOfTypingANumber{
            
@@ -46,13 +77,9 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTypingANumber = true
         }
         
-//        if(symbol != ""){
-//            dis.text = dis.text! + number
-//        }
-        
-        
     }
     
+    //AC 归零
     @IBAction func clear(_ sender: UIButton) {
         dis.text = ""
         symbol = ""
@@ -65,6 +92,7 @@ class ViewController: UIViewController {
         control_storage = 0
     }
     
+    //小数点
     @IBAction func point(_ sender: Any) {
         if(number == ""){
             number = "0"
@@ -76,102 +104,149 @@ class ViewController: UIViewController {
             dis.text = dis.text! + "."
             decimal = 1
         }
-//        if(symbol != ""){
-//            dis.text = dis.text! + number
-//        }
         
     }
 
-    
+    //正负号
     @IBAction func minus(_ sender: Any) {
-        if(dis.text == ""){
-            dis.text = ""
-        }
-        else if(control != 0){
+        //和小数点问题一样，显示正负号有问题
+        if(control_minus == 0) {
             
-            if(control_minus == 0) {
-                number = "-" + number
-                control_minus = 1
+            if(control == 0){
+                dis.text = ""
             }
-            else {
+            
+            else if(control == 1){
+                while(dis.text?.last != "+" && control != 0){
+                    dis.text?.removeLast()
+                }
+            }
+                    
+            else if(control == 2){
+                while(dis.text?.last != "-" && control != 0){
+                    dis.text?.removeLast()
+                }
+            }
+                    
+            else if(control == 4){
+                while(dis.text?.last != "*" && control != 0){
+                    dis.text?.removeLast()
+                }
+            }
+                    
+            else if(control == 4){
+                while(dis.text?.last != "/" && control != 0){
+                    dis.text?.removeLast()
+                }
+            }
+                
+            number = "-" + number
+            control_minus = 1
+            dis.text = dis.text! + number
+            
+        }
+        else {
+            
+            if(control == 0){
+                dis.text?.removeFirst()
                 number.removeFirst() //除去第一
                 control_minus = 0
             }
-        }
-        else{
-            
-            if(control_minus == 0) {
-                dis.text = "-" + dis.text!
-                control_minus = 1
+            else if(control == 1){
+                while(dis.text?.last != "+" && control != 0){
+                    dis.text?.removeLast()
+                }
+                
+                number.removeFirst() //除去第一
+                dis.text = dis.text! + number
+                control_minus = 0
             }
-            else {
-                dis.text?.removeFirst() //除去第一
+                
+            else if(control == 2){
+                while(dis.text?.last != "-" && control != 0){
+                    dis.text?.removeLast()
+                }
+                
+                number.removeFirst() //除去第一
+                dis.text = dis.text! + number
+                control_minus = 0
+            }
+                
+            else if(control == 4){
+                while(dis.text?.last != "*" && control != 0){
+                    dis.text?.removeLast()
+                }
+                
+                number.removeFirst() //除去第一
+                dis.text = dis.text! + number
+                control_minus = 0
+            }
+                
+            else if(control == 4){
+                while(dis.text?.last != "/" && control != 0){
+                    dis.text?.removeLast()
+                }
+                
+                number.removeFirst() //除去第一
+                dis.text = dis.text! + number
                 control_minus = 0
             }
         }
         
     }
     
+    //退位
     @IBAction func remove(_ sender: Any) {
         
         if(dis.text == ""){
             dis.text = ""
         }
+        //退位正负号规则不严谨和减号混合
         else if(dis.text == "-"){
             dis.text = ""
             number = ""
             control_minus = 0
         }
-        else if(control == 0){
             
-            if(dis.text?.last == "."){
-                dis.text?.removeLast()// 数组尾端移除变量值
-                number = dis.text!
-                decimal = 0
-            }
-            else{
-                dis.text?.removeLast()// 数组尾端移除变量值
-                number = dis.text!
-            }
+        else if(dis.text?.last == "."){
+            dis.text?.removeLast()// 数组尾端移除变量值
+            number.removeLast()
+            decimal = 0
         }
+
         else if(dis.text?.last == "*" && control_storage != 0){
             dis.text?.removeLast()// 数组尾端移除变量值
             control = 0
             number = number_one
             number_one = number_storage
             control = control_storage
-             control_storage = 0
+            control_storage = 0
         }
+            
         else if(dis.text?.last == "/" && control_storage != 0){
             dis.text?.removeLast()// 数组尾端移除变量值
             control = 0
             number = number_one
             number_one = number_storage
             control = control_storage
-             control_storage = 0
+            control_storage = 0
         }
-        else if(control != 0  && number == ""){
             
+        else if(control != 0  && number == ""){
             dis.text?.removeLast()
-            number = dis.text!
             symbol = ""
             control = 0
+            number = number_one
         }
-        else{
             
-            if(number.last == "."){
-                number.removeLast()
-                dis.text = number_one + symbol + number
-                decimal = 0
-            }
-            else{
-                number.removeLast()
-                dis.text = number_one + symbol + number
-            }
+        else{
+            number.removeLast()
+            dis.text?.removeLast()
         }
         
     }
     
+    //加号按钮
     @IBAction func addition(_ sender: Any) {
         
         if(dis.text == ""){
@@ -299,6 +374,7 @@ class ViewController: UIViewController {
    
     }
     
+    //减号按钮
     @IBAction func subtraction(_ sender: Any) {
         
         if(dis.text == ""){
@@ -422,6 +498,7 @@ class ViewController: UIViewController {
     var number_storage = ""
     var control_storage = 0
 
+    //乘号按钮
     @IBAction func multiplication(_ sender: Any) {
         
         if(dis.text == ""){
@@ -513,6 +590,7 @@ class ViewController: UIViewController {
         
     }
     
+    //除号按钮
     @IBAction func division(_ sender: Any) {
         
         if(dis.text == ""){
@@ -659,12 +737,12 @@ class ViewController: UIViewController {
                 result.removeLast()
             }
         }
-        
-       
     }
+    
+    //等号按钮
     @IBAction func ca(_ sender: UIButton) {
-        
-         if(control == 0 || number == "")
+        //没有数字时，一个数字时，一个数字一个符号时
+        if(control == 0 || number == "")
         {
             dis.text = dis.text
         }
@@ -771,7 +849,6 @@ class ViewController: UIViewController {
             number_one = ""
             dis.text = result
             number = result
-            decimal = 0
             control = 0
             number_storage = ""
             control_storage = 0
