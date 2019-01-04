@@ -252,7 +252,16 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
-        else if(control == 0){
+        else if(number == "" && control == 0){
+            number_one = result
+            number = ""
+            symbol = "+"
+            control = 1
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+        }
+        else if(number != "" && control == 0){
                 number_one = number
                 number = ""
                 symbol = "+"
@@ -380,7 +389,16 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
-        else if(control == 0){
+        else if(number == "" && control == 0){
+            number_one = result
+            number = ""
+            symbol = "-"
+            control = 2
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+        }
+        else if(number != "" && control == 0){
                 number_one = number
                 number = ""
                 symbol = "-"
@@ -504,7 +522,16 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
-        else if(control == 0){
+        else if(number == "" && control == 0){
+            number_one = result
+            number = ""
+            symbol = "*"
+            control = 3
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+        }
+        else if(number != "" && control == 0){
                 number_one = number
                 number = ""
                 symbol = "*"
@@ -596,7 +623,16 @@ class ViewController: UIViewController {
         if(dis.text == ""){
             dis.text = ""
         }
-        else if(control == 0){
+        else if(number == "" && control == 0){
+            number_one = result
+            number = ""
+            symbol = "/"
+            control = 4
+            decimal = 0
+            control_minus = 0
+            dis.text = dis.text! + symbol
+        }
+        else if(number != "" && control == 0){
                 number_one = number
                 number = ""
                 symbol = "/"
@@ -848,7 +884,7 @@ class ViewController: UIViewController {
             
             number_one = ""
             dis.text = result
-            number = result
+            number = ""
             control = 0
             number_storage = ""
             control_storage = 0
