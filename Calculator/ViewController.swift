@@ -14,7 +14,7 @@ class ViewController: UIViewController {
    
     @IBOutlet weak var dis_2: UILabel!
     //var：定义一个变量 变量类型从右边推导而来
-    var input: Bool = false
+    var input: Bool = false//判断是否输入
     
     var number_one:String = ""//第一个数字
 
@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     var number_storage = ""
     var control_storage = 0
     
+    //1+2*3 再点 +（-） 全部运算，如果退位 +（-） 点 *（/） 运算错误，所以做以下备份，点 +（-） 时备份 ，退位 +（-） 全部返回
     var number_1 = ""
     var number_one_1 = ""
     var number_storage_1 = ""
@@ -373,17 +374,17 @@ class ViewController: UIViewController {
             }
             
         }
-        else if(control == 1 && number == ""){
-            result = "\(Double(number_one)! + Double(number_one)!)"
-            number = result
-            number_one = result
-            symbol = "+"
-            control = 1
-            decimal = 0
-            control_minus = 0
-            dis.text = result + symbol
-            
-        }
+//        else if(control == 1 && number == ""){
+//            result = "\(Double(number_one)! + Double(number_one)!)"
+//            number = result
+//            number_one = result
+//            symbol = "+"
+//            control = 1
+//            decimal = 0
+//            control_minus = 0
+//            dis.text = result + symbol
+//
+//        }
         else if(control == 1 && number != ""){
             result = "\(Double(number_one)! + Double(number)!)"
             number_one = result
@@ -534,17 +535,17 @@ class ViewController: UIViewController {
             //control_storage = 0
             }
         }
-        else if(control == 2 && number == ""){
-            result = "\(Double(number_one)! - Double(number_one)!)"
-            number = result
-            number_one = result
-            symbol = "-"
-            control = 2
-            decimal = 0
-            control_minus = 0
-            dis.text = result + symbol
-            
-        }
+//        else if(control == 2 && number == ""){
+//            result = "\(Double(number_one)! - Double(number_one)!)"
+//            number = result
+//            number_one = result
+//            symbol = "-"
+//            control = 2
+//            decimal = 0
+//            control_minus = 0
+//            dis.text = result + symbol
+//
+//        }
         else if(control == 1 && number != ""){
             result = "\(Double(number_one)! + Double(number)!)"
             number_one = result
@@ -644,7 +645,7 @@ class ViewController: UIViewController {
             }
             else{
                 result = "\(Double(number_one)! / Double(number)!)"
-                esult = String(format: "%0.8f", Double(result)!)
+                result = String(format: "%0.8f", Double(result)!)
             
                 while (result.last == "0"){
                     result.removeLast() // 数组尾端移除变量值
@@ -703,7 +704,7 @@ class ViewController: UIViewController {
                 number_one = result
                 symbol = "*"
                 control = 3
-                ecimal = 0
+                decimal = 0
                 control_minus = 0
                 number = ""
                 dis.text = dis.text! + symbol
@@ -785,32 +786,32 @@ class ViewController: UIViewController {
             
         }
             
-        else if(control == 4 && number == ""){
-            if(number_one == "0"){
-                dis_2.text = dis.text
-                result = "错误,除数不为0"
-                dis.text = result
-            }
-            else{
-                result = "\(Double(number_one)! / Double(number_one)!)"
-                result = String(format: "%0.8f", Double(result)!)
-            
-                while (result.last == "0"){
-                    result.removeLast() // 数组尾端移除变量值
-                }
-                if (result.last == "."){
-                    result.removeLast()
-                }
-                number = result
-                number_one = result
-                symbol = "/"
-                control = 4
-                decimal = 0
-                control_minus = 0
-                dis.text = result + symbol
-            }
-            
-        }
+//        else if(control == 4 && number == ""){
+//            if(number_one == "0"){
+//                dis_2.text = dis.text
+//                result = "错误,除数不为0"
+//                dis.text = result
+//            }
+//            else{
+//                result = "\(Double(number_one)! / Double(number_one)!)"
+//                result = String(format: "%0.8f", Double(result)!)
+//            
+//                while (result.last == "0"){
+//                    result.removeLast() // 数组尾端移除变量值
+//                }
+//                if (result.last == "."){
+//                    result.removeLast()
+//                }
+//                number = result
+//                number_one = result
+//                symbol = "/"
+//                control = 4
+//                decimal = 0
+//                control_minus = 0
+//                dis.text = result + symbol
+//            }
+//            
+//        }
             
             else if(control == 1 && number != ""){
             
